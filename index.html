@@ -9,7 +9,7 @@
       const url = urlParams.get('url');
 
       if (url) {
-        const match = url.match(/\/s\/([^\/]+)/);
+        const match = url.match(/\/s\/(.+)/);
         if (match && match[1]) {
           const id = match[1];
           window.location.href = `https://icy-broor12.arjunavai273.workers.dev/?id=${id}`;
