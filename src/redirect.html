@@ -12,7 +12,7 @@
         const match = url.match(/\/s\/(.+)/);
         if (match && match[1]) {
           const id = match[1];
-          const workerUrl = "__WORKER_URL__";  // <-- placeholder
+          const workerUrl = "__WORKER_URL__";  // <- placeholder
           window.location.href = `${workerUrl}?id=${id}`;
         } else {
           document.body.innerText = "Invalid Terabox URL.";
