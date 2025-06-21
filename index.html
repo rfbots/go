@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const url = urlParams.get('url');
+
+      if (url) {
+        const match = url.match(/\/s\/(.+)/);
+        if (match && match[1]) {
+          const id = match[1];
+          window.location.href = `https://white-mountain-d1d1.blogged1-com.workers.dev/?url=${id}`;
+        } else {
+          document.body.innerText = "Invalid Terabox URL.";
+        }
+      } else {
+        document.body.innerText = "Missing 'url' parameter.";
+      }
+    };
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>
