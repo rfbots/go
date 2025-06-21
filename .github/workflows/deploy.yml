@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Static HTML with Secrets
 
 on:
   push:
@@ -6,19 +6,22 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Replace __WORKER_URL__ with secret
+    - name: Copy src to dist
+      run: mkdir dist && cp -r src/* dist/
+
+    - name: Replace __WORKER_URL__ in HTML
       run: |
-        find . -type f -name "*.html" -exec sed -i "s|__WORKER_URL__|${{ secrets.WORKER_URL }}|g" {} +
+        find dist -type f -name "*.html" -exec sed -i "s|__WORKER_URL__|${{ secrets.WORKER_URL }}|g" {} +
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./  # root of repo or change if using `dist/`
+        publish_dir: ./dist
